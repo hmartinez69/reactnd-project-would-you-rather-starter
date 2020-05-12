@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/hmartinez69/reactnd-project-would-you-rather-starter.svg?branch=master)](https://travis-ci.com/hmartinez69/reactnd-project-would-you-rather-starter)
+
 # Would You Rather
 
 Would You Rather is a fully responsive and mobile-ready polling game that presents the user with a series of questions.
