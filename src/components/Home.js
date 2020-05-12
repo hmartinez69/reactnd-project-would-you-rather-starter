@@ -1,30 +1,17 @@
-import React, { Component } from "react";
-import PropTypes from 'prop-types'
-import { connect } from "react-redux";
-import { Tab } from "semantic-ui-react";
-import UserCard from "./UserCard";
-import PollTeaser from "./PollTeaser";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { Tab } from 'semantic-ui-react';
+import UserCard from './UserCard';
 
-const color = {
-    green: {
-        name: 'green',
-        hex: '#21ba45'
-    },
-    blue: {
-        name: 'blue',
-        hex: '#2185d0'
-    }
-};
-
-class Home extends Component {
+export class Home extends Component {
     static propTypes = {
         userQuestionData: PropTypes.object.isRequired
-    }
-
+    };
     render() {
-        const { userQuestionData } = this.props
+        const { userQuestionData } = this.props;
 
-        return <Tab panes={panes({ userQuestionData })} className={"tab"} />
+        return <Tab panes={panes({ userQuestionData })} className="tab" />;
     }
 }
 
@@ -38,15 +25,9 @@ const panes = props => {
                     {userQuestionData.answered.map(question => (
                         <UserCard
                             key={question.id}
-                            userId={question.author}
-                            color={color.green.hex}
-                        >
-                            <PollTeaser
-                                question={question}
-                                unanswered={true}
-                                color={color.green.name}
-                            />
-                        </UserCard>
+                            question_id={question.id}
+                            unanswered={true}
+                        />
                     ))}
                 </Tab.Pane>
             )
@@ -58,15 +39,9 @@ const panes = props => {
                     {userQuestionData.unanswered.map(question => (
                         <UserCard
                             key={question.id}
-                            userId={question.author}
-                            color={color.blue.hex}
-                        >
-                            <PollTeaser
-                                question={question}
-                                unanswered={false}
-                                color={color.blue.name}
-                            />
-                        </UserCard>
+                            question_id={question.id}
+                            unanswered={false}
+                        />
                     ))}
                 </Tab.Pane>
             )
@@ -77,10 +52,10 @@ const panes = props => {
 function mapStateToProps({ authUser, users, questions }) {
     const answeredIds = Object.keys(users[authUser].answers);
     const answered = Object.values(questions)
-        .filter(question => answeredIds.includes(question.id))
+        .filter(question => !answeredIds.includes(question.id))
         .sort((a, b) => b.timestamp - a.timestamp);
     const unanswered = Object.values(questions)
-        .filter(question => !answeredIds.includes(question.id))
+        .filter(question => answeredIds.includes(question.id))
         .sort((a, b) => b.timestamp - a.timestamp);
 
     return {
@@ -91,4 +66,4 @@ function mapStateToProps({ authUser, users, questions }) {
     };
 }
 
-export default connect(mapStateToProps)(Home)
+export default connect(mapStateToProps)(Home);
