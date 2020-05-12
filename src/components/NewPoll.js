@@ -45,7 +45,6 @@ export class NewPoll extends Component {
         });
     };
     render() {
-        console.log('this.props', this.props);
         const disabled = this.state.option1 === '' || this.state.option2 === '';
 
         if (this.state.validSubmit === true) {
