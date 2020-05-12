@@ -1,6 +1,6 @@
-import React, { Component, Fragment } from "react";
-import PropTypes from 'prop-types'
-import { connect } from "react-redux";
+import React, { Component, Fragment } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import {
     Segment,
     Grid,
@@ -9,17 +9,16 @@ import {
     Form,
     Loader,
     Dimmer
-} from "semantic-ui-react";
-import { setAuthUser } from "../actions/authUser";
+} from 'semantic-ui-react';
+import { setAuthUser } from '../actions/authUser';
 
 export class Login extends Component {
     state = {
         loading: false
-    }
-
+    };
     handleLoading = () => {
-        this.setState({ loading: true })
-    }
+        this.setState({ loading: true });
+    };
 
     render() {
         return (
@@ -28,17 +27,17 @@ export class Login extends Component {
                     <LoginHeader />
                     <LoginGridLayout
                         image={<BrandImage />}
-                        form={<ConnectedLoginForm onloading={this.handleLoading} />}
+                        form={<ConnectedLoginForm onLoading={this.handleLoading} />}
                         loading={this.state.loading}
                     />
                 </Segment.Group>
-                <footer className={"footer"}>
-                    <a href={"https://www.freepik.com/free-photos-vectors/design"}>
+                <footer className="footer">
+                    <a href="https://www.freepik.com/free-photos-vectors/design">
                         Avatar characters created by freepik - www.freepik.com
                     </a>
                 </footer>
             </Fragment>
-        )
+        );
     }
 }
 
